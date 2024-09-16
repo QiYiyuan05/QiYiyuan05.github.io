@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Java迭代器和增强for笔记</title>
+      <link href="/2024/09/16/oopre-01/"/>
+      <url>/2024/09/16/oopre-01/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h1><h2 id="1-什么是迭代器"><a href="#1-什么是迭代器" class="headerlink" title="1. 什么是迭代器"></a>1. 什么是迭代器</h2><blockquote><p>Java迭代器（Iterator）是 Java 集合框架中的一种机制，是一种用于遍历集合（如列表、集合和映射等）的接口。</p><p>它提供了一种统一的方式来访问集合中的元素，而不需要了解底层集合的具体实现细节。</p><p><strong>迭代器不是容器，而是用来遍历容器的一种工具</strong>。</p></blockquote><h2 id="2-迭代器的常用方法"><a href="#2-迭代器的常用方法" class="headerlink" title="2. 迭代器的常用方法"></a>2. 迭代器的常用方法</h2><ol><li>boolen hasnext():如果集合中还有元素可以迭代，返回true。</li><li>E next():让迭代器对象指向下一个元素，并且返回该元素对象。</li><li>void remove():删除迭代器当前指向的元素。</li></ol><h2 id="3-迭代器的使用方法："><a href="#3-迭代器的使用方法：" class="headerlink" title="3. 迭代器的使用方法："></a>3. 迭代器的使用方法：</h2><ol><li><p>导入迭代器的包</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br></pre></td></tr></tbody></table></figure></li><li><p>使用iterator()方法获得迭代器对象，迭代器对象类似于一个指针，默认指向<strong>集合的第一个元素之前</strong>。</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Iterator</span> <span class="variable">iter</span> <span class="operator">=</span> list.iterator();</span><br></pre></td></tr></tbody></table></figure></li><li><p>判断迭代器中是否还有元素可以迭代。</p></li><li><p>根据判断结果选择退出循环或者获取元素并重复2。</p></li></ol><h2 id="4-列表迭代器"><a href="#4-列表迭代器" class="headerlink" title="4. 列表迭代器"></a>4. 列表迭代器</h2><p>当普通的迭代器对象在遍历集的时候同时进行集合中元素的增删的时候，IDEA会报并发修改异常（ConcurrentModificationException）。想要实现这种需求，可以使用列表迭代器。</p><p>（待补）</p><h1 id="二、增强for循环"><a href="#二、增强for循环" class="headerlink" title="二、增强for循环"></a>二、增强for循环</h1><h2 id="1-增强for形式"><a href="#1-增强for形式" class="headerlink" title="1. 增强for形式"></a>1. 增强for形式</h2><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(数据类型 变量名:数组或者集合对象){</span><br><span class="line"><span class="comment">//循环体</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>有点像python遍历列表（for i in list:） <del>我说怎么有点熟悉</del></p><p>注意点：</p><ol><li>数据类型 得和 数组或者集合对象内的数据元素 相同。</li><li>对象赋值给变量名，变量遍历数组或集合。变量即元素。</li></ol><h2 id="2-增强for实现原理"><a href="#2-增强for实现原理" class="headerlink" title="2. 增强for实现原理"></a>2. 增强for实现原理</h2><p>对以下代码进行反编译：</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Integer i : list) {</span><br><span class="line">   System.out.println(i);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>反编译后代码：</p><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer i;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">Iterator</span> <span class="variable">iterator</span> <span class="operator">=</span> list.iterator(); iterator.hasNext(); System.out.println(i)){</span><br><span class="line">   i = (Integer)iterator.next();        </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p>增强for的底层依赖是迭代器（iterator），因此在增强for遍历过程中，元素集合是不可以进行增删的。虽然被迭代的元素集合不能被改变，但是可以使用Iterator自带的方法remove()进行删除对象。Iterator.remove()方法在删除当前迭代对象的同时维护索引的一致性。</p><p>倘若在遍历过程中直接对元素集合进行增删，IDEA会抛出ConcurrentModificationException报错。这与Java中fast-fail机制有关。</p><h2 id="3-为什么需要增强for循环？"><a href="#3-为什么需要增强for循环？" class="headerlink" title="3. 为什么需要增强for循环？"></a>3. 为什么需要增强for循环？</h2><p>上手容易，操作方便。简化数组和循环的遍历，增强代码可读性。（语法糖😋）</p><p>（待补）</p><h1 id="fail-fast、fail-safe机制"><a href="#fail-fast、fail-safe机制" class="headerlink" title="fail-fast、fail-safe机制"></a>fail-fast、fail-safe机制</h1><p>（待补）</p><h1 id="后记：动机"><a href="#后记：动机" class="headerlink" title="后记：动机"></a>后记：动机</h1><p>晚上五点，水群：</p><p><strong>同学A</strong>：为什么我的作业在本地可以跑但是提交后全都显示RUNTIME_ERROR，一般会是什么原因？</p><p><strong>同学B</strong>：我也出过这个问题，说是数组越界。然后我在遍历方法里加入break就解决了。</p><p><strong>同学C</strong>：盲猜一手循环里删东西.jpg</p><p><strong>学长</strong>A：搜索关键词：增强型 for循环，迭代器</p><p><strong>学长B</strong>：想起来在循环内部修改迭代容器的报错了（目移）</p><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://www.runoob.com/java/java-iterator.html">Java Iterator（迭代器） | 菜鸟教程 (runoob.com)</a></p><p><a href="https://blog.csdn.net/TYRA9/article/details/127972439">java 增强for和迭代器 万字详解 (粗俗易懂)-CSDN博客</a></p><p><a href="https://zhuanlan.zhihu.com/p/87101522">Java中的增强for循环的实现原理与坑 - 知乎 (zhihu.com)</a></p><p><a href="https://developer.baidu.com/article/detail.html?id=3339135">深入解析增强型For循环：让遍历更简单-百度开发者中心 (baidu.com)</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OOpre </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OOpre </tag>
+            
+            <tag> Java </tag>
+            
+            <tag> 语法糖 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2024/09/11/hello-world/"/>
       <url>/2024/09/11/hello-world/</url>
