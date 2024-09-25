@@ -336,7 +336,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    525
+                    529
                 </div>
                 
 
@@ -376,7 +376,7 @@
 <p>输出格式</p>
 <p>输出一个整数，表示优质数对的数目。</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
-<li>通过超级基数SB把条件二和条件三合并。变成条件：$SB<em>A_i+B_i=SB</em>B_j+A_j$，实现<code>i</code>和<code>j</code>的分离。将两次遍历化简，使得只需要一次遍历，完成查找前面的值和插入数据。</li>
+<li>通过超级基数SB把条件二和条件三合并。变成条件：$ SB\times A_i + B_i = SB \times B_j + A_j $，实现<code>i</code>和<code>j</code>的分离。将两次遍历化简，使得只需要一次遍历，完成查找前面的值和插入数据。</li>
 <li>使用哈希表建立1.中条件的结果值，并建立cnt数组与哈希表对齐，储存的前面结果值出现的次数。通过哈希表化简查找过程，进行结果值的对比并进行累加。</li>
 </ol>
 <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
@@ -765,7 +765,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">2.4k</span>&nbsp;字
+                class="white-color">2.5k</span>&nbsp;字
             
             
             
