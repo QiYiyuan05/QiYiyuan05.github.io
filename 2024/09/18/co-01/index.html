@@ -367,7 +367,7 @@
 <p>记[X]<sub>补</sub> = $\overline{x_n x_{n-1} … x_0}$，[Y]<sub>补</sub> =  $\overline{y_n y_{n-1} … y_0}$</p>
 <p>可以验证，当X，Y均为正数或者无符号数时，有 [X <em> Y]<sub>补</sub> = [X]<sub>补</sub> </em> [Y]<sub>补</sub></p>
 <p>若乘数为负数，负数的符号位参加运算，使得得到的结果出现偏差。因此在加数相加时还需要进行特判。</p>
-<h2 id="Booth算法"><a href="#Booth算法" class="headerlink" title="Booth算法"></a>Booth算法</h2><h2 id="从竖式出发"><a href="#从竖式出发" class="headerlink" title="从竖式出发"></a>从竖式出发</h2><p>回忆算术中，竖式计算乘法的过程。</p>
+<h2 id="Booth算法"><a href="#Booth算法" class="headerlink" title="Booth算法"></a>Booth算法</h2><h3 id="从竖式出发"><a href="#从竖式出发" class="headerlink" title="从竖式出发"></a>从竖式出发</h3><p>回忆算术中，竖式计算乘法的过程。</p>
 <p>考虑X<em>Y，X </em> 1 = X，X * 0 = 0，乘数后得到的结果位移后相加得到积。所以考虑如何能通过变化使得某个乘数二进制表达形式里1的数量尽量少。首先考虑一个1，即 010<sub>(B)</sub> 1的数量不能再少了，不变。再考虑多个1连在一起的情况，如 01110<sub>(B)</sub> = 01000<sub>(B)</sub> - 00010<sub>(B)</sub>  。我们可以从高位开始研究这种字符串的特征（对当前位进行操作，操作类型和当前位和前位有关）。如下表。</p>
 <div class="table-container">
 <table>
@@ -405,7 +405,7 @@
 <p>我们再考虑最低位，最低位前面没有位数，但是我们可以看成最低位是边界，所以可以补一个0辅助操作。</p>
 <p>每次操作完之后都要进行移位。减去X可以看成加上X的相反数。即我们就可以化简乘法过程中的加法运算。但是请注意，计算相反数进行取反操作前要位数左对齐。</p>
 <p>计算完之后结果应该为2n位，舍去溢出的2n高位。</p>
-<h2 id="从补码与真值之间的关系出发"><a href="#从补码与真值之间的关系出发" class="headerlink" title="从补码与真值之间的关系出发"></a>从补码与真值之间的关系出发</h2><p>记X，Y为有符号数，[X]<sub>补</sub> = $\overline{x_n x_{n-1} …x_0}$，[Y]<sub>补</sub> = $\overline{y_n y_{n-1} …y_0}$，我们将前文提到的式子进行一定形式的变化。</p>
+<h3 id="从补码与真值之间的关系出发"><a href="#从补码与真值之间的关系出发" class="headerlink" title="从补码与真值之间的关系出发"></a>从补码与真值之间的关系出发</h3><p>记X，Y为有符号数，[X]<sub>补</sub> = $\overline{x_n x_{n-1} …x_0}$，[Y]<sub>补</sub> = $\overline{y_n y_{n-1} …y_0}$，我们将前文提到的式子进行一定形式的变化。</p>
 <p>$ y = -y_n \times 2^{n} + \sum_{i = 0}^{n-1} y_i \times 2^{i} = -y_n \times 2^n + \left( y_0 \times 2^{0} + y_1 \times 2^{1} + \dots + y_{n-1} \times 2^{n-1} \right) \\   = (y_{-1} - y_0) \times 2^{0} + (y_0 - y_1) \times 2^{1} + \dots + (y_{n-1} - y_n) \times 2^{n}, \quad \text{其中} \quad y_{-1} = 0 $</p>
 <p>则$ x \times y=x \times ((y_{-1}-y_0)+(y_0-y_1) \times 2^1+…+(y_{n-1}-y_n) \times 2^{n}),y_{-1}=0 $</p>
 <p>由于是二进制，相邻两项的差的结果只能是-1，0，1，对应上表的减去X，无，加上X操作。真值和补码的关系对于有符号数，所以上述方法对有符号数也成立。</p>
@@ -515,48 +515,46 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/09/18/co-01/">
+                <a href="/2024/09/25/al-hash-problems/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="计算机组成原理笔记">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="哈希表与哈希查找相关题目留档">
                         
-                        <span class="card-title">计算机组成原理笔记</span>
+                        <span class="card-title">哈希表与哈希查找相关题目留档</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            计算机组成原理
+                            哈希查找
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-09-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/CO/" class="post-category">
-                                    CO
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CO/">
-                        <span class="chip bg-color">CO</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>
@@ -725,7 +723,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">1.9k</span>&nbsp;字
+                class="white-color">2.4k</span>&nbsp;字
             
             
             
