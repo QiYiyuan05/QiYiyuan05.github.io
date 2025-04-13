@@ -370,8 +370,8 @@
 </ol>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本单元的主题是 <strong>递归下降</strong> 。</p>
 <p>本单元的背景是 <strong>表达式解析</strong> 。</p>
-<h2 id="最终架构与分析"><a href="#最终架构与分析" class="headerlink" title="最终架构与分析"></a>最终架构与分析</h2><h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src=".\image\src.png" alt=""></p>
-<h3 id="量化分析"><a href="#量化分析" class="headerlink" title="量化分析"></a>量化分析</h3><p><img src=".\image\Unit1_class_metrics.png" alt=""></p>
+<h2 id="最终架构与分析"><a href="#最终架构与分析" class="headerlink" title="最终架构与分析"></a>最终架构与分析</h2><h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="..\images\OO_image\src.png" alt=""></p>
+<h3 id="量化分析"><a href="#量化分析" class="headerlink" title="量化分析"></a>量化分析</h3><p><img src="..\images\OO_image\Unit1_class_metrics.png" alt=""></p>
 <p>可以发现，类复杂度分布不均。其中 <code>Poly</code> 、 <code>Mono</code> 、 <code>Parser</code> 类的WMC值较高，分析原因是因为 <code>Poly</code> 和 <code>Mono</code> 类内部有关三角函数化简的方法复杂度过高， <code>Parser</code> 类内部解析方法的条件判断分支过多，复杂度高。可以考虑将三角函数化简方法移到新的化简类中，分解方法内部的逻辑。</p>
 <p><del>关于IDEA的statistic插件我使用不了，解决无果</del></p>
 <p>我的 <code>Poly</code> 类中有27个方法，代码有461行， <code>Mono</code> 类中有20个方法，代码有438行。其中部分方法方法可以进一步解耦，减少两个核心类的代码规模<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>。</p>
