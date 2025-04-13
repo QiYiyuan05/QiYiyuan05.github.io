@@ -334,7 +334,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    529
+                    524
                 </div>
                 
 
@@ -359,25 +359,35 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="哈希表-哈希查找"><a href="#哈希表-哈希查找" class="headerlink" title="哈希表/哈希查找"></a>哈希表/哈希查找</h1><p>记录一下自己不会做的题。</p>
-<h2 id="优质数对"><a href="#优质数对" class="headerlink" title="优质数对"></a>优质数对</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给你一个长度为N的数组A和B，对于满足以下三个条件的数对(i,j)被称之为优质数对：</p>
-<ol>
-<li>$1 \leq i &lt; j \leq N $</li>
-<li>$A_i = B_j$</li>
-<li>$A_j=B_i$</li>
+                <h1 id="哈希表哈希查找">哈希表/哈希查找</h1>
+<p>记录一下自己不会做的题。</p>
+<h2 id="优质数对">优质数对</h2>
+<h3 id="问题描述">问题描述</h3>
+<p>给你一个长度为N的数组A和B，对于满足以下三个条件的数对(i,j)被称之为优质数对：</p>
+<ol type="1">
+<li>$1 i &lt; j N $</li>
+<li><span class="math inline">\(A_i = B_j\)</span></li>
+<li><span class="math inline">\(A_j=B_i\)</span></li>
 </ol>
 <p>请你输出有多少个优质数对？</p>
-<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行输入一个整数N，表示A和B的长度。</p>
-<p>第二行输入N个整数$A_1,A_2…A_N$，表示数组A。</p>
-<p>第二行输入N个整数$B_1,B_2…B_N$，表示数组B。</p>
-<p>数据范围保证：$2\leq N\leq10^5$，$1\leq A_i,B_i\leq10^9$</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行输入一个整数N，表示A和B的长度。</p>
+<p>第二行输入N个整数<span class="math inline">\(A_1,A_2...A_N\)</span>，表示数组A。</p>
+<p>第二行输入N个整数<span class="math inline">\(B_1,B_2...B_N\)</span>，表示数组B。</p>
+<p>数据范围保证：<span class="math inline">\(2\leq
+N\leq10^5\)</span>，<span class="math inline">\(1\leq
+A_i,B_i\leq10^9\)</span></p>
 <p>输出格式</p>
 <p>输出一个整数，表示优质数对的数目。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
-<li>通过超级基数SB把条件二和条件三合并。变成条件：$ SB\times A_i + B_i = SB \times B_j + A_j $，实现<code>i</code>和<code>j</code>的分离。将两次遍历化简，使得只需要一次遍历，完成查找前面的值和插入数据。</li>
+<h3 id="思路">思路</h3>
+<ol type="1">
+<li>通过超级基数SB把条件二和条件三合并。变成条件：$ SBA_i + B_i = SB B_j
++ A_j
+$，实现<code>i</code>和<code>j</code>的分离。将两次遍历化简，使得只需要一次遍历，完成查找前面的值和插入数据。</li>
 <li>使用哈希表建立1.中条件的结果值，并建立cnt数组与哈希表对齐，储存的前面结果值出现的次数。通过哈希表化简查找过程，进行结果值的对比并进行累加。</li>
 </ol>
-<h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<h3 id="实现过程">实现过程</h3>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">SB</span> <span class="token expression"><span class="token number">1000000003</span></span></span>
@@ -450,7 +460,8 @@
   <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>来源：<a target="_blank" rel="noopener" href="https://www.lanqiao.cn/problems/3877/learning/?page=2&amp;first_category_id=1&amp;tags=哈希表&amp;sort=students_count&amp;asc=0">0优质数对 - 蓝桥云课 (lanqiao.cn)</a></p>
+<p>来源：<a target="_blank" rel="noopener" href="https://www.lanqiao.cn/problems/3877/learning/?page=2&amp;first_category_id=1&amp;tags=哈希表&amp;sort=students_count&amp;asc=0">0优质数对
+- 蓝桥云课 (lanqiao.cn)</a></p>
 
                 
             </div>
@@ -761,7 +772,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.5k</span>&nbsp;字
+                class="white-color">2.5k</span>&nbsp;字
             
             
             
