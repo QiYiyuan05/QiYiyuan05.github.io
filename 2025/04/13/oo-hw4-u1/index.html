@@ -370,8 +370,8 @@
 </ol>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本单元的主题是 <strong>递归下降</strong> 。</p>
 <p>本单元的背景是 <strong>表达式解析</strong> 。</p>
-<h2 id="最终架构与分析"><a href="#最终架构与分析" class="headerlink" title="最终架构与分析"></a>最终架构与分析</h2><h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="/images/OO_image/src.png" alt=""></p>
-<h3 id="量化分析"><a href="#量化分析" class="headerlink" title="量化分析"></a>量化分析</h3><p><img src="/images/OO_image/Unit1_class_metrics.png" alt=""></p>
+<h2 id="最终架构与分析"><a href="#最终架构与分析" class="headerlink" title="最终架构与分析"></a>最终架构与分析</h2><h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="/images/OO_image/src.png" alt="图片"></p>
+<h3 id="量化分析"><a href="#量化分析" class="headerlink" title="量化分析"></a>量化分析</h3><p><img src="/images/OO_image/Unit1_class_metrics.png" alt="图片"></p>
 <p>可以发现，类复杂度分布不均。其中 <code>Poly</code> 、 <code>Mono</code> 、 <code>Parser</code> 类的WMC值较高，分析原因是因为 <code>Poly</code> 和 <code>Mono</code> 类内部有关三角函数化简的方法复杂度过高， <code>Parser</code> 类内部解析方法的条件判断分支过多，复杂度高。可以考虑将三角函数化简方法移到新的化简类中，分解方法内部的逻辑。</p>
 <p><del>关于IDEA的statistic插件我使用不了，解决无果</del></p>
 <p>我的 <code>Poly</code> 类中有27个方法，代码有461行， <code>Mono</code> 类中有20个方法，代码有438行。其中部分方法方法可以进一步解耦，减少两个核心类的代码规模<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>。</p>
@@ -395,11 +395,9 @@
 <li><p>通过所有 <code>Expr</code> 、 <code>Term</code> 和 <code>Factor</code> 类的 <code>toPoly()</code> 方法，将解析后的表达式统一化为 <code>Poly</code> 和 <code>Mono</code> 类的组合，以进行进一步处理。</p>
 </li>
 <li><p><code>Mono</code> 类：单项式类，内部用两个HashMap存储三角函数因子内部对应的指数。</p>
-<p>$Mono=x^{exp} \cdot \prod ^{n}_{i=0}sin(Poly_i)^{exp_i} \cdot \prod ^{n}_{j=0}cos(Poly_j)^{exp_j}$</p>
-</li>
+<script type="math/tex; mode=display">Mono=x^{exp} \cdot \prod ^{n}_{i=0}sin(Poly_i)^{exp_i} \cdot \prod ^{n}_{j=0}cos(Poly_j)^{exp_j}</script></li>
 <li><p><code>Poly</code> 类：多项式类，内部用HashMap存储Mono对应的系数。当HashMap为空时，默认Poly = 0. </p>
-<p>$Poly = \sum^n_{i=0}coe_{i}\cdot Mono_{i}$</p>
-</li>
+<script type="math/tex; mode=display">Poly = \sum^n_{i=0}coe_{i}\cdot Mono_{i}</script></li>
 <li><p><code>Poly</code> 类内部 <code>Simplied()</code> 方法是三角函数化简的入口，在该方法内部按顺序调用其他化简方法。</p>
 </li>
 </ul>
