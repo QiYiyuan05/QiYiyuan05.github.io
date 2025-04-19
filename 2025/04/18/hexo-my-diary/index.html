@@ -331,14 +331,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-04-18
+                    2025-04-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    338
                 </div>
                 
 
@@ -363,7 +363,42 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="解决-pandoc渲染插件-图片下方出现两次caption的问题">解决
+pandoc渲染插件 图片下方出现两次caption的问题</h1>
+<p>2025.04.18</p>
+<h2 id="问题描述">问题描述</h2>
+<p>逛自己博客的时候看到如下情况：</p>
+<p><img src="/images/diary/description_01_01.png"></p>
+<p><img src="/images/diary/description_01_02.png"></p>
+<p>图片描述在图片正下方显示了一次，又在下方偏左的地方显示了第二次。</p>
+<p>当图片描述非空的时候不会出现上述情况：</p>
+<p><img src="/images/diary/description_01_03.png"></p>
+<p>两次图片描述的字体还不一样，有点强迫症，希望能把第二次描述的文字去除。</p>
+<h2 id="解决方法">解决方法</h2>
+<p><code>F12</code> 看到出现问题的页面源代码如下：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figure</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/images/OO_image/Adventurer.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Adventurer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figcaption</span><span class="token punctuation">&gt;</span></span>Adventurer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figcaption</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figure</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>要解决问题，我们得想办法去掉
+<code>&lt;figcaption&gt;Adventurer&lt;/figcaption&gt;</code></p>
+<p>查找资料后，我找到一篇博文提供了解决方法<a target="_blank" rel="noopener" href="https://www.wylu.me/posts/7bd83fc5/#comment-changyan">Hexo NexT
+图片caption出现多次 | wylu</a></p>
+<p>在顶层文件 <code>_comfig.yml</code> 文件中， <code>pandoc</code>
+条目下加上
+<code>extensions: - '-implicit_figures'</code>。修改之后，我的相关配置如下：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">pandoc</span><span class="token punctuation">:</span>
+  <span class="token key atrule">args</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token string">"--mathjax"</span>
+  <span class="token key atrule">extensions</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token string">'-implicit_figures'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重新载入Hexo后，问题并未解决，于是我顺着 <code>pandoc</code> 的
+<code>-implicit_figures</code> 继续查找解决方法。</p>
+<p>在 <code>pandoc-manual</code> 找到扩展说明如下：</p>
+<p><img src="/images/diary/solution_01_01.png"></p>
+<p>如果我们想要一个常规的内联图像，我们需要确保这个照片不是段落的唯一内容，按照样例，我们可以在其后面加斜杠。</p>
+<p>问题解决！</p>
+
                 
             </div>
             <hr/>
@@ -490,7 +525,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            自己搭建博客过程中遇到的问题以及自己的解决方式
+                            搭建博客过程中遇到的问题以及解决方式
                         
                     </div>
                     <div class="publish-info">
@@ -680,7 +715,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.4k</span>&nbsp;字
+                class="white-color">26.7k</span>&nbsp;字
             
             
             
