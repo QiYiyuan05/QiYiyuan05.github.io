@@ -363,11 +363,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="异或运算">异或运算</h1>
-<p>可以理解为无进位相加，因此满足交换律和结合律。</p>
-<h2 id="抽象问题">抽象问题</h2>
-<h2 id="交换两个数">交换两个数</h2>
-<p>根据交换律和结合律可知，a =</p>
+                <h1 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h1><p>可以理解为无进位相加，因此满足交换律和结合律。</p>
+<h2 id="抽象问题"><a href="#抽象问题" class="headerlink" title="抽象问题"></a>抽象问题</h2><h2 id="交换两个数"><a href="#交换两个数" class="headerlink" title="交换两个数"></a>交换两个数</h2><p>根据交换律和结合律可知，a = </p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span> args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
@@ -384,42 +381,42 @@
         arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="位运算实现加减乘除">位运算实现加减乘除</h1>
-<p>有关题目：力扣 No.29 两数相除<del>（还没过捏）</del></p>
+<h1 id="位运算实现加减乘除"><a href="#位运算实现加减乘除" class="headerlink" title="位运算实现加减乘除"></a>位运算实现加减乘除</h1><p>有关题目：力扣 No.29 两数相除<del>（还没过捏）</del></p>
 <p>感觉位运算相关知识在Logisim和计组可能会用到，先了解一下基础知识。</p>
-<h2 id="加法">1. 加法</h2>
-<p>以下是一位二进制相加的结果</p>
+<h2 id="1-加法"><a href="#1-加法" class="headerlink" title="1. 加法"></a>1. 加法</h2><p>以下是一位二进制相加的结果</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">a</th>
-<th style="text-align: center;">b</th>
-<th style="text-align: center;">a+b</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">a+b</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">00</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">00</td>
 </tr>
 <tr>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">01</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">01</td>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">01</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">01</td>
 </tr>
 <tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">10</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>可以观察到<code>a+b</code>低位为<code>a ^ b</code>的结果，高位为<code>a &amp; b</code>的结果。<code>a ^ b</code>是无进位加法的结果，<code>a &amp; b</code>是进位信息，进位信息左移一位即为进位结果。位运算实现加法，可以分解为无进位加法的结果加上进位结果，即<code>(a ^ b) + (a &amp; b &lt;&lt; 1)</code>。当进位信息为0时，即<code>(a &amp; b &lt;&lt; 1) == 0</code>时，加法结果即为无进位加法的结果，<code>(a ^ b) + (a &amp; b &lt;&lt; 1) = (a ^ b) ^ (a &amp; b &lt;&lt; 1)</code>。进位信息不为0时，迭代a，b的值再进行上述操作。每次操作1的数量一定不会增加，经过有限次操作后一定可以会得到进位信息为0的时候，得到结果。</p>
 <p>以下是Java代码示例</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -431,8 +428,7 @@
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="减法">2.减法</h2>
-<p>减去被减数可以看成加上被减数的相反数，因此只需要写一个相反数转化的函数再调用上述加法代码即可实现减法功能。需要注意相反数数补码的转换。</p>
+<h2 id="2-减法"><a href="#2-减法" class="headerlink" title="2.减法"></a>2.减法</h2><p>减去被减数可以看成加上被减数的相反数，因此只需要写一个相反数转化的函数再调用上述加法代码即可实现减法功能。需要注意相反数数补码的转换。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>									<span class="token comment">// add()函数同上</span>
 <span class="token punctuation">}</span>
@@ -444,8 +440,7 @@
 <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">neg</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token operator">~</span>n<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="乘法">3.乘法</h2>
-<p>根据乘法竖式的方法我们可以得到相关代码。</p>
+<h2 id="3-乘法"><a href="#3-乘法" class="headerlink" title="3.乘法"></a>3.乘法</h2><p>根据乘法竖式的方法我们可以得到相关代码。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>	<span class="token comment">// add()函数同上</span>
 <span class="token punctuation">}</span>
@@ -462,12 +457,8 @@
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="除法">4.除法</h2>
-<p>考虑 280 / 25 的结果。280 = 25 * 2<sup>3</sup> + 25 * 2<sup>1</sup> +
-25 * 2<sup>0</sup> ，所以280 / 25 = 1011<sub>B</sub> = 11。</p>
-<p>a / b 计算方法是从高位依次枚举2右上角的指数n，然后考虑被除数是否含有
-b * 2<sup>n</sup>。如果含有则使被除数减去 b *
-2<sup>n</sup>，否则被除数不变。然后让指数减少。直到指数为-1。剩下的被除数结果即为余数。</p>
+<h2 id="4-除法"><a href="#4-除法" class="headerlink" title="4.除法"></a>4.除法</h2><p>考虑 280 / 25 的结果。280 = 25 <em> 2<sup>3</sup> + 25 </em> 2<sup>1</sup> + 25 * 2<sup>0</sup> ，所以280 / 25 = 1011<sub>B</sub> = 11。</p>
+<p>a / b 计算方法是从高位依次枚举2右上角的指数n，然后考虑被除数是否含有 b <em> 2<sup>n</sup>。如果含有则使被除数减去 b </em> 2<sup>n</sup>，否则被除数不变。然后让指数减少。直到指数为-1。剩下的被除数结果即为余数。</p>
 <p>y右移可能会有溢出代码，因为是位移后与x比较大小，y右移等价于x左移相同的位数。</p>
 <p>以下是示例代码。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 必须保证a和b都不是整数最小值，返回a除以b的结果，主要是因为整数最小值不能转化得到相反数</span>
@@ -507,9 +498,7 @@ b * 2<sup>n</sup>。如果含有则使被除数减去 b *
     <span class="token keyword">int</span> offset <span class="token operator">=</span> b <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token function">neg</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token function">add</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> offset<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="总结">5. 总结</h2>
-<p>加法：利用每一步无进位相加的结果 +
-进位的结果不停计算，直到进位消失</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p>加法：利用每一步无进位相加的结果 + 进位的结果不停计算，直到进位消失</p>
 <p>减法：利用加法，和一个数字x相反数就是(~x)+1</p>
 <p>乘法：回想小学时候怎么学的乘法，除此之外没别的了</p>
 <p>除法：为了防止溢出，让被除数右移，而不是除数左移。从高位尝试到低位。</p>
@@ -808,7 +797,7 @@ b * 2<sup>n</sup>。如果含有则使被除数减去 b *
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">26.7k</span>&nbsp;字
+                class="white-color">27k</span>&nbsp;字
             
             
             
