@@ -537,7 +537,7 @@ mjx-container[display="true"] + br {
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-05-21
+                    2025-05-22
                 </div>
                 
 
@@ -653,10 +653,8 @@ Bug、新增功能）后，重新执行已有测试用例，确保原有功能�
 <code>Message &lt;- EmojiMessage/RedEnvelopeMessage/ForwardMessage</code></p>
 <p>通过JML给定了整个社交网络的基本功能规格，如何设计层次之间的交互方法甚至额外层次是本单元</p>
 <p>作业的关键。</p>
-<figure>
-<img src="/2025/05/21/oo-hw12-u3/uml.png" alt="UML类图">
-<figcaption aria-hidden="true">UML类图</figcaption>
-</figure>
+<p><img src="/2025/05/21/oo-hw12-u3/uml.png" alt="UML类图"><br>
+</p>
 <h3 id="建模">建模</h3>
 <p><code>Network</code> 可以看作是社交关系网络的抽象，为图结构。
 <code>Person</code> 和 <code>Relation</code>
@@ -821,8 +819,8 @@ Bug、新增功能）后，重新执行已有测试用例，确保原有功能�
 <li><p><code>query_triple_sum/qts</code>
 ：查询用户关系图上三元环的数量。</p>
 <ol type="1">
-<li>朴素算法，根据JML的算法，时间复杂度为O(V^3)，如果运行大量
-<code>qts</code> 则一定会超时。</li>
+<li>朴素算法，根据JML的算法，时间复杂度为 <code>O(V^3)</code>
+，如果运行大量 <code>qts</code> 则一定会超时。</li>
 <li>我采用的方法是动态维护中间变量，直接维护图三元环的数量。当图增边或删边时，判断操作的边能否和其他边构成三元环，从而增加或删除边的数量。我的做法是取
 <code>id1</code> 和 <code>id2</code> 的 <code>acquaintance</code>
 ，将取出的临界点集合用 <code>retainAll()</code>
@@ -1346,7 +1344,7 @@ Bug、新增功能）后，重新执行已有测试用例，确保原有功能�
 <script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script>
     MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
     });
 </script>
 
