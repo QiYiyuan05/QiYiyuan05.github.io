@@ -338,7 +338,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    825
+                    828
                 </div>
                 
 
@@ -363,68 +363,45 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="解决-pandoc渲染插件-图片下方出现两次caption的问题">解决
-pandoc渲染插件 图片下方出现两次caption的问题</h2>
-<p>2025.04.18</p>
-<h3 id="问题描述">问题描述</h3>
-<p>逛自己博客的时候看到如下情况：</p>
-<p><img src="/2025/04/18/hexo-my-diary/description_01_01.png"></p>
-<p><img src="/2025/04/18/hexo-my-diary/description_01_02.png"></p>
+                <h2 id="解决-pandoc渲染插件-图片下方出现两次caption的问题"><a href="#解决-pandoc渲染插件-图片下方出现两次caption的问题" class="headerlink" title="解决 pandoc渲染插件 图片下方出现两次caption的问题"></a>解决 pandoc渲染插件 图片下方出现两次caption的问题</h2><p>2025.04.18</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>逛自己博客的时候看到如下情况：</p>
+<p><img src="/2025/04/18/hexo-my-diary/description_01_01.png" alt=""></p>
+<p><img src="/2025/04/18/hexo-my-diary/description_01_02.png" alt=""></p>
 <p>图片描述在图片正下方显示了一次，又在下方偏左的地方显示了第二次。</p>
 <p>当图片描述非空的时候不会出现上述情况：</p>
-<p><img src="/2025/04/18/hexo-my-diary/description_01_03.png"></p>
+<p><img src="/2025/04/18/hexo-my-diary/description_01_03.png" alt=""></p>
 <p>两次图片描述的字体还不一样，有点强迫症，希望能把第二次描述的文字去除。</p>
-<h3 id="解决方法">解决方法</h3>
-<p><code>F12</code> 看到出现问题的页面源代码如下：</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p> <code>F12</code> 看到出现问题的页面源代码如下：</p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figure</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/images/OO_image/Adventurer.png<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Adventurer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figcaption</span><span class="token punctuation">&gt;</span></span>Adventurer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figcaption</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figure</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>要解决问题，我们得想办法去掉
-<code>&lt;figcaption&gt;Adventurer&lt;/figcaption&gt;</code></p>
-<p>查找资料后，我找到一篇博文提供了解决方法<a target="_blank" rel="noopener" href="https://www.wylu.me/posts/7bd83fc5/#comment-changyan">Hexo NexT
-图片caption出现多次 | wylu</a></p>
-<p>在顶层文件 <code>_comfig.yml</code> 文件中， <code>pandoc</code>
-条目下加上
-<code>extensions: - '-implicit_figures'</code>。修改之后，我的相关配置如下：</p>
+<p>要解决问题，我们得想办法去掉 <code>&lt;figcaption&gt;Adventurer&lt;/figcaption&gt;</code></p>
+<p>查找资料后，我找到一篇博文提供了解决方法<a target="_blank" rel="noopener" href="https://www.wylu.me/posts/7bd83fc5/#comment-changyan">Hexo NexT 图片caption出现多次 | wylu</a></p>
+<p>在顶层文件 <code>_comfig.yml</code> 文件中， <code>pandoc</code> 条目下加上 <code>extensions: - '-implicit_figures'</code>。修改之后，我的相关配置如下：</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">pandoc</span><span class="token punctuation">:</span>
   <span class="token key atrule">args</span><span class="token punctuation">:</span>
     <span class="token punctuation">-</span> <span class="token string">"--mathjax"</span>
   <span class="token key atrule">extensions</span><span class="token punctuation">:</span>
     <span class="token punctuation">-</span> <span class="token string">'-implicit_figures'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>重新载入Hexo后，问题并未解决，于是我顺着 <code>pandoc</code> 的
-<code>-implicit_figures</code> 继续查找解决方法。</p>
+<p>重新载入Hexo后，问题并未解决，于是我顺着 <code>pandoc</code> 的 <code>-implicit_figures</code> 继续查找解决方法。</p>
 <p>在 <code>pandoc-manual</code> 找到扩展说明如下：</p>
-<p><img src="/2025/04/18/hexo-my-diary/solution_01_01.png"></p>
+<p><img src="/2025/04/18/hexo-my-diary/solution_01_01.png" alt=""></p>
 <p>如果我们想要一个常规的内联图像，我们需要确保这个照片不是段落的唯一内容，按照样例，我们可以在其后面加反斜杠。</p>
 <p>问题解决！</p>
-<h2 id="安装并启用-post_asset_folder-插件修改文件渲染逻辑">安装并启用
-post_asset_folder 插件，修改文件渲染逻辑</h2>
-<p>我原来采用的方法是启用全局 <code>image</code>
-文件夹进行图片渲染。今天晚上在寝室里写 <code>.md</code>
-文件，总感觉文件里图片不渲染不得劲，而且只有在生成之后才能看到自己带图片的文章，不能很好地看到问题反馈进行修改。</p>
-<p>之前在选择渲染方式的时候也看到过其他可以解决的办法，<del>但是当时偷懒没搞</del>
-于是我想着用换一种方式。</p>
-<p>最后选择启用并安装 <code>post_assert_folder</code>
-插件。只是这样之后需要忍受图片文件夹和 <code>.md</code>
-同处一个文件夹的困扰。</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/codecheng99/p/12380799.html">hexo中图片无法加载
-- CodeNow99 - 博客园</a></p>
-<h2 id="正文内部成对半角小括号渲染问题">正文内部成对半角小括号渲染问题</h2>
-<p>2025.05.21</p>
-<h3 id="问题描述-1">问题描述</h3>
-<p>今天把OO课程第三单元感受写完了，但是遇到一个问题，就是与
-<code>.md</code>
-文件关联的同名文件夹中的图片提交不上去。最后瞎搞，往里面多加了一张图片，重新生成提交就有图片了，删除多加的图片后也没有问题。</p>
+<h2 id="安装并启用-post-asset-folder-插件，修改文件渲染逻辑"><a href="#安装并启用-post-asset-folder-插件，修改文件渲染逻辑" class="headerlink" title="安装并启用 post_asset_folder 插件，修改文件渲染逻辑"></a>安装并启用 post_asset_folder 插件，修改文件渲染逻辑</h2><p>我原来采用的方法是启用全局 <code>image</code> 文件夹进行图片渲染。今天晚上在寝室里写 <code>.md</code> 文件，总感觉文件里图片不渲染不得劲，而且只有在生成之后才能看到自己带图片的文章，不能很好地看到问题反馈进行修改。</p>
+<p>之前在选择渲染方式的时候也看到过其他可以解决的办法，<del>但是当时偷懒没搞</del> 于是我想着用换一种方式。</p>
+<p>最后选择启用并安装 <code>post_assert_folder</code> 插件。只是这样之后需要忍受图片文件夹和 <code>.md</code> 同处一个文件夹的困扰。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/codecheng99/p/12380799.html">hexo中图片无法加载 - CodeNow99 - 博客园</a></p>
+<h2 id="正文内部成对半角小括号渲染问题"><a href="#正文内部成对半角小括号渲染问题" class="headerlink" title="正文内部成对半角小括号渲染问题"></a>正文内部成对半角小括号渲染问题</h2><p>2025.05.21</p>
+<h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>今天把OO课程第三单元感受写完了，但是遇到一个问题，就是与 <code>.md</code> 文件关联的同名文件夹中的图片提交不上去。最后瞎搞，往里面多加了一张图片，重新生成提交就有图片了，删除多加的图片后也没有问题。</p>
 <p>然后我在网页中翻文章。看到以下情况</p>
-<p><img src="/2025/04/18/hexo-my-diary/description_03_01.png"></p>
+<p><img src="/2025/04/18/hexo-my-diary/description_03_01.png" alt=""></p>
 <p>对应的 <code>md</code> 文件中的源代码是这样的</p>
-<p><img src="/2025/04/18/hexo-my-diary/description_03_02.png"></p>
+<p><img src="/2025/04/18/hexo-my-diary/description_03_02.png" alt=""></p>
 <p>疑似是某个渲染文件把半角小括号渲染成了其他格式，导致文章中不仅不能渲染成对半角小括号，而且会更改正文的字体。<del>并且我还挺喜欢用半角小括号的</del>所以我想尝试解决一下问题。</p>
-<h3 id="解决方法-1">解决方法</h3>
-<p>找到篇大大的博文，描述了类似的问题：<a target="_blank" rel="noopener" href="https://adaning.github.io/posts/33457.html">MathJax常见问题 |
-DaNing的博客</a></p>
-<p>总结一下：在blog-theme-matery.ejs文件中修改以下代码</p>
+<h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h3><p>找到篇大大的博文，描述了类似的问题：<a target="_blank" rel="noopener" href="https://adaning.github.io/posts/33457.html">MathJax常见问题 | DaNing的博客</a></p>
+<p>总结一下：在blog\themes\hexo-theme-matery\layout\post.ejs文件中修改以下代码</p>
 <pre class="line-numbers language-none"><code class="language-none">// old
 tex2jax: {inlineMath: [['$', '$'],['\(', '\)']]}
 
@@ -548,31 +525,31 @@ tex2jax: {inlineMath: [['$', '$']]}<span aria-hidden="true" class="line-numbers-
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/05/19/buaa-military-theory-project/">
+                <a href="/2025/05/21/oo-hw12-u3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="北航军事理论大作业虚拟仿真大作业感悟">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="BUAA-OO-2025 Unit.3 总结">
                         
-                        <span class="card-title">北航军事理论大作业虚拟仿真大作业感悟</span>
+                        <span class="card-title">BUAA-OO-2025 Unit.3 总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            博主刷军事理论虚拟仿真大作业有感，写下了这篇博文
+                            契约式编程、JML规格
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-19
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-05-21
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%86%9B%E4%BA%8B%E7%90%86%E8%AE%BA/" class="post-category">
-                                    军事理论
+                            <a href="/categories/OO/" class="post-category">
+                                    OO
                                 </a>
                             
                             
@@ -586,8 +563,8 @@ tex2jax: {inlineMath: [['$', '$']]}<span aria-hidden="true" class="line-numbers-
                         <span class="chip bg-color">BUAA/北航</span>
                     </a>
                     
-                    <a href="/tags/%E5%86%9B%E4%BA%8B%E7%90%86%E8%AE%BA/">
-                        <span class="chip bg-color">军事理论</span>
+                    <a href="/tags/OO-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">OO/面向对象编程</span>
                     </a>
                     
                 </div>
@@ -749,7 +726,7 @@ tex2jax: {inlineMath: [['$', '$']]}<span aria-hidden="true" class="line-numbers-
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">46k</span>&nbsp;字
+                class="white-color">46.2k</span>&nbsp;字
             
             
             
